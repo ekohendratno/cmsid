@@ -25,6 +25,7 @@ define('DB_NAME', 'cmsid_2016');
 //nama awal table
 define('DB_PRE', 'cmsid_');
 
+
 /*
  * untuk setting alamat url website manual jika anda pindah host/alamat domain
  * silahkan atur di database anda pd table _options cari siteurl di field option_name

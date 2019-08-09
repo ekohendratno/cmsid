@@ -3,7 +3,6 @@
  * @copyright	Copyright (C) 2010 Open Source, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
 if (!defined("_iEXEC")):
 define('_iEXEC', true);
 

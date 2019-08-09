@@ -61,7 +61,7 @@ function do_meta_boxes( $context, $object ) {
 						foreach( $box['setting'] as $d_k => $d_v )
 							$dx.= " $d_k=\"$d_v\"";
 							
-					echo '<a '.$dx.' href="" data-perform="panel-config" data-toggle="tooltip" data-placement="left" title="" data-original-title="Config '.$box[title].'" class="pull-right to-config modal-show" style="visibility: hidden;"><i class="glyphicon glyphicon-pencil"></i></a>';
+					echo '<a '.$dx.' href="" data-perform="panel-config" data-toggle="tooltip" data-placement="left" title="" data-original-title="Config '.$box['title'].'" class="pull-right to-config modal-show" style="visibility: hidden;"><i class="glyphicon glyphicon-pencil"></i></a>';
 					}
 					
 					echo '</div>' . "\n";

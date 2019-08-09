@@ -42,7 +42,7 @@ class MySQL{
 	
 	protected $reconnect_retries = 5;
 	
-	private $use_mysqli = false;
+	private $use_mysqli = true;
 	
 	function __construct( $dbuser, $dbpass, $dbname, $dbhost, $pre_table ) {
 		register_shutdown_function( array( &$this, '__destruct' ) );
@@ -76,8 +76,8 @@ class MySQL{
    	}
 	
 	function connect_mysql(){
-		if ( debug ) {
-			$this->dbh = mysql_connect( $this->dbhost, $this->dbuser, $this->dbpass, true );
+		if ( $this->use_mysqli ) { //if ( debug ) {
+			$this->dbh = mysqli_connect( $this->dbhost, $this->dbuser, $this->dbpass );
 		} else {
 			$this->dbh = @mysql_connect( $this->dbhost, $this->dbuser, $this->dbpass, true );
 		}
@@ -102,8 +102,14 @@ class MySQL{
 		if ( is_null($dbh) )
 			$dbh = $this->dbh;
 
-		if ( !@mysql_select_db( $db, $dbh ) ) {
+		$mysql_select_db = false;
+		if ( $this->use_mysqli ) {
+			$mysql_select_db = @mysqli_select_db( $dbh,$db );
+		}else{
+			$mysql_select_db = @mysql_select_db( $db, $dbh );
+		}
 			
+		if(!$mysql_select_db){
 			$this->bail( sprintf( '<div class=\"padding\"><div class="message padding"><h1>Tidak dapat memilih database</h1>
 			<p>Kami dapat terhubung ke server database (yang berarti nama pengguna dan kata sandi Anda oke) namun tidak dapat memilih database <code>%1$s</code> .</p>
 			<ul>

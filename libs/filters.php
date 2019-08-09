@@ -77,10 +77,15 @@ function _call_all_hook($args) {
 }
 
 function my_escape( $string ){
-	if( !empty( $string ) ){
+	global $db;
+	
+	$use_mysqli = true;
+	
+	if( !empty( $string ) ){	
 		
-		if (version_compare(phpversion(),"4.3.0", "<")) mysql_escape_string($string);
-		else mysql_real_escape_string($string);
+		
+		//if ( $use_mysqli ) mysqli_real_escape_string($db, $string);
+		//else mysql_real_escape_string($string);
 		
 		return $string;
 	}

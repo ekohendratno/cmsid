@@ -5,7 +5,7 @@
  */
 if(!defined('_iEXEC')) exit;
 
-class Error {
+class Error2 {
 	
 	/** menyimpan daftar kesalahan*/
 	var $errors = array();
@@ -146,7 +146,8 @@ class Error {
 	 * @return bool true
 	 */
 	function is_error($thing) {
-		if ( is_object($thing) && is_a($thing, 'Error') )
+		if ( is_object($thing) && is_a($thing, 'Error2') )
 			return true;
 		return false;
 	}
+

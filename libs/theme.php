@@ -259,6 +259,10 @@ function get_system_included( $option, $file = 'manage' ){
 	return;
 }
 
+function is_system_values(){
+	return '';
+}
+
 /**
  * Menampilkan konten manager
  *
@@ -276,11 +280,9 @@ function the_main_manager($li,$il){
 	}
 	else 
 	{
-		if(get_system_cheked( get_admin() ) == false 
-		&& get_admin() )
-		{
-			header("location:?admin=404");
-			exit;
+		if(get_system_cheked( get_admin() ) == false  && get_admin() ) {
+			//header("location:?admin=404");
+			//exit;
 		}else{
 			if( get_admin() == '404' ){
 				if( file_exists(admin_path . "/404.php") )
@@ -306,13 +308,13 @@ function the_main_manager($li,$il){
 function the_menuaction($li,$il){
 	global $widget, $sidebar_default;
 
-	if( isset($widget[m]) && count($widget[m]) > 0 && !empty($widget[m]) ) {
-		foreach($widget[m] as $k => $v)	echo $li. $v[l] . "'>" . $v[t] . $il;		
+	if( isset($widget['m']) && count($widget['m']) > 0 && !empty($widget['m']) ) {
+		foreach($widget['m'] as $k => $v)	echo $li. $v['l'] . "'>" . $v['t'] . $il;		
 	}else{
 		
 	
 	$plugins 	= get_dir_plugins();
-	foreach($plugins as $key => $val){
+	foreach((array) $plugins as $key => $val){
 		$name = get_plugins_name($key);
 		$key2 = str_replace( $name .'/', '' , $key );
 		
@@ -324,13 +326,13 @@ function the_menuaction($li,$il){
 		}
 	}
 	
-	foreach($sidebar_default as $k => $v){
-		/*if( get_sys_cheked( $k ) )*/ $sidebar_menus[$k] = array('t' => $v[t], 'l' => $v[l]);
+	foreach((array) $sidebar_default as $k => $v){
+		/*if( get_sys_cheked( $k ) )*/ $sidebar_menus[$k] = array('t' => $v['t'], 'l' => $v['l']);
 	}
 	
 	$sidebar_menus = parse_args($plugins_new,$sidebar_menus);	
 	$sidebar_menus = array_multi_sort($sidebar_menus, array('t' => SORT_ASC));
-	foreach($sidebar_menus as $k => $v)	echo $li. $v[l] . "'>" . $v[t] . $il;	
+	foreach((array) $sidebar_menus as $k => $v)	echo $li. $v['l'] . "'>" . $v['t'] . $il;	
 	
 	}
 }

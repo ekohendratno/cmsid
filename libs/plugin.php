@@ -21,7 +21,7 @@ function get_dir_plugins( $plugin = null ) {
 		$component_data = array_merge( $component_data, array('id' => $plugin_id[0]) );  
 		
 		if ( empty ( $component_data['Name'] ) )
-			continue;
+			return;
 
 		$component[plugin_basename( $component_file, $component_root )] = $component_data;
 		
@@ -35,7 +35,7 @@ function get_dir_plugins( $plugin = null ) {
 	if ( $component_dir ) {
 		while (($file = readdir( $component_dir ) ) !== false ) {
 			if ( substr($file, 0, 1) == '.' )
-				continue;
+				return;
 			if ( is_dir( $component_root.$file ) ) {
 				/*
 				
@@ -67,11 +67,11 @@ function get_dir_plugins( $plugin = null ) {
 
 	foreach ( $component_files as $component_file ) {
 		if ( !is_readable( "$component_root/$component_file" ) )
-			continue;
+			return;
 		
 		$component_data = get_plugin_data( "$component_root/$component_file" ); 
 		if ( empty ( $component_data['Name'] ) )
-			continue;
+			return;
 
 		$component[plugin_basename( $component_file, $component_root )] = $component_data;
 		//echo "$component_root/$component_file<br>";
